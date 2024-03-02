@@ -24,6 +24,30 @@
         .mulish {
             font-family: "Mulish", sans-serif;
         }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
     </style>
 </head>
 
@@ -33,17 +57,21 @@
         <nav>
             <div class="navbar bg-base-100">
                 <div class="flex-1">
-                    <a class="btn btn-ghost text-3xl font-extrabold">ReTro</a>
+                    <a class="btn btn-ghost text-4xl font-extrabold">ReTro</a>
                 </div>
                 <div class="flex-none gap-3 ">
                     <ul class="menu menu-horizontal px-1 gap-2">
-                        <li><a class="bg-[#12132D1A] rounded-full"><img src="images/home.png" alt=""></i></a></li>
-                        <li><a class="bg-[#12132D1A] rounded-full"><img src="images/Frame (1).png" alt=""></a></li>
-                        <li><a class="bg-[#12132D1A] rounded-full"><img src="images/Frame.png" alt=""></i></a></li>
-                        <li><a class="bg-[#12132D1A] rounded-full"><img src="images/Frame (2).png" alt=""></a></li>
+                        <li><a class="bg-[#12132D1A] rounded-full tooltip"><img src="images/home.png" alt=""></i><span
+                                    class="tooltiptext">Home</span></a></li>
+                        <li><a class="bg-[#12132D1A] rounded-full tooltip"><img src="images/Frame (1).png" alt=""><span
+                                    class="tooltiptext">Write</span></a></li>
+                        <li><a class="bg-[#12132D1A] rounded-full tooltip"><img src="images/Frame.png" alt=""></i><span
+                                    class="tooltiptext">Add Friends</span></a></li>
+                        <li><a class="bg-[#12132D1A] rounded-full tooltip"><img src="images/Frame (2).png" alt=""><span
+                                    class="tooltiptext">Country</span></a></li>
                     </ul>
 
-                    <button class="btn btn-secondary bg-[#797DFC] border-none rounded-full">Secondary</button>
+                    <button class="btn btn-secondary bg-[#797DFC] border-none rounded-full">Sign In</button>
                 </div>
             </div>
         </nav>
@@ -52,7 +80,42 @@
 
     <!--  Main section -->
     <main>
+        <section
+            class="lg:h-[550px] bg-[url('images/bgbanner.png')] bg-no-repeat flex flex-col lg:flex-row items-center bg-cover relative bg-[#12132D] rounded-3xl mt-4 gap-10 lg:gap-40 p-6">
 
+            <div class="lg:ml-16">
+                <h2 class="text-7xl font-extrabold text-white">Welcome to the <br><span
+                        class="text-[#797DFC]">ReTro</span> Forum</h2>
+                <p class="text-white ">
+                    A forum website enables users to engage in discussions, share ideas, <br>and connect with others who
+                    share similar interests, <br> fostering a vibrant online community.</p>
+
+                    <div class="flex items-center mt-10 relative">
+                        <input type="text" placeholder="search here anything" class="input rounded-full input-bordered w-[400px] max-w-xs mr-2 absolute" />
+                        <button class="btn btn-secondary bg-[#797DFC] border-none rounded-full absolute ml-[230px]">Sign In</button>
+                    </div>
+
+            </div>
+
+            <div class="overflow-x-auto text-[#12132DCC] bg-white h-[290px] w-[370px] rounded-2xl flex p-10 justify-between">
+                <div class="text-xl font-bold">
+                    <ul class="space-y-5">
+                        <li>Registered User</li>
+                        <li>Forum</li>
+                        <li>Topics</li>
+                        <li>Replies</li>
+                    </ul>
+                </div>
+                <div class="text-xl font-bold " >
+                    <ul class="space-y-5">
+                        <li>01</li>
+                        <li>05</li>
+                        <li>01</li>
+                        <li>01</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </main>
 
 
