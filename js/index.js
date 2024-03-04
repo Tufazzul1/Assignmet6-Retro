@@ -1,28 +1,32 @@
 
-const loadDiscuss = async () => {
-    const response = await fetch('https://openapi.programming-hero.com/api/retro-forum/posts');
+const loadDiscuss = async (catId) => {
+    const response = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${catId}`);
     const data = await response.json();
 
 
     const allPostsContainer = document.getElementById('all-post-container')
+    allPostsContainer.textContent = '';
     allPostsContainer.classList = "lg:w-[65%] my-14 space-y-8"
 
 
     data.posts.forEach(item => {
+        let isActive = null;
         const div = document.createElement("div");
         div.innerHTML = `
         <div class="flex flex-col lg:flex-row gap-5 border-2 p-4  rounded-lg bg-[#797DFC1A]">
-                        <div class="">
-                            <img class="bg-slate-300 p-1 rounded-xl h-16 w-16" src="${item?.image}" alt="">
+                        <div class="relative">
+                            <img class="bg-slate-300 p-1 rounded-xl h-16 w-16 relative" src="${item?.image}" alt="">
+                            <div class ="absolute -top-0 -right-0 h-[15px] w-[15px] rounded-full ${item?.isActive ? 'bg-green-700' : 'bg-red-700'}">
+                            </div>
                         </div>
                         <div class="w-full">
                             <div class="flex gap-4">
                                 <h3>#${item.category}</h3>
-                                <h3>${item?.author?.name}</h3>
+                                <h3> Authore : ${item?.author?.name}</h3>
 
                             </div>
                             <div class="mt-4">
-                                <h3 class="text-xl font-bold">10 Kids Unaware of Their Halloween Costumet</h3>
+                                <h3 class="text-xl font-bold">${item?.title}</h3>
                                 <p class="text-p-colors">
                                     ${item?.description}
                                 </p>
@@ -37,26 +41,30 @@ const loadDiscuss = async () => {
                                     <p>${item?.posted_time}</p>
                                 </div>
                                 <div>
-                                    <img src="images/Group.png" alt="">
+                                    <button onclick="setReadValue()" id ="mark-read-button"><img src="images/Group.png" alt=""></button>
                                 </div>
                             </div>
                         </div>
                     </div>
         `
 
+
+
         allPostsContainer.appendChild(div)
         console.log(item)
     });
+    // hide the spinner 
+    toggleLoadingSpinner(false)
 }
 
 
 // latest post section
-
+let markReadCount = 0;
 const latestPosts = async (item) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/retro-forum/latest-posts`);
     const data = await response.json();
 
-   
+
     const latestPostsContainer = document.getElementById('latest-posts-container');
     latestPostsContainer.classList = "grid lg:grid-cols-3 gap-4 lg:mt-10"
 
@@ -71,7 +79,7 @@ const latestPosts = async (item) => {
                     </div>
                     <div class="flex">
                         <img src="images/calender.png" alt="">
-                        <h4>${item?.author?.posted_date}</h4>
+                        <h4>${item?.author?.posted_date || 'No publish date'}</h4>
                     </div>
                     <div>
                         <h3 class="text-xl font-bold">${item?.title}</h3>
@@ -82,19 +90,50 @@ const latestPosts = async (item) => {
                             <img class = "h-16 w-16 rounded-full"src="${item?.profile_image}" alt="">
                         </div>
                         <div>
-                            <h4 class="font-bold">Cameron Williamson</h4>
-                            <h5>Unknown</h5>
+                            <h4 class="font-bold">${item?.author?.name}</h4>
+                            <h5>${item?.author?.designation || 'Unknown'}</h5>
                         </div>
                     </div>
 
                 </div>
         `
-
         latestPostsContainer.appendChild(div)
-        console.log(item)
+        
     })
 }
 
-loadDiscuss()
 
+const handleSearch = ()=>{
+    const value = document.getElementById('search-box').value;
+    toggleLoadingSpinner(true);
+    if(value){
+        loadDiscuss(value) 
+    }
+    else{
+        alert('Plesee enter a valid catergory')
+    }
+
+}
+
+const toggleLoadingSpinner = (isLoading)=>{
+
+    const loadingSpinner = document.getElementById('loading-spinner');
+    if(isLoading){
+        loadingSpinner.classList.remove('hidden');
+    }
+    else{
+        loadingSpinner.classList.add('hidden'); 
+    }
+
+}
+
+
+
+function setReadValue(id, value) {
+    const markRead = document.getElementById(id);
+    setReadValue.innerText = value;
+    console.log('clicked')
+}
+
+loadDiscuss()
 latestPosts()

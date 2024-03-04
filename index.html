@@ -41,8 +41,6 @@
             text-align: center;
             border-radius: 6px;
             padding: 5px 0;
-
-            /* Position the tooltip */
             position: absolute;
             z-index: 1;
         }
@@ -107,10 +105,10 @@
                     share similar interests, <br> fostering a vibrant online community.</p>
 
                 <div class="flex items-center mt-10 relative bg-black">
-                    <input type="text" placeholder="search here anything"
+                    <input id="search-box" type="text" placeholder="search here anything"
                         class="input rounded-full input-bordered w-full max-w-xs mr-2 absolute" />
-                    <button class="btn btn-secondary bg-[#797DFC] border-none rounded-full absolute ml-[230px]">Sign
-                        In</button>
+                    <button onclick="handleSearch()" class="btn btn-secondary bg-[#797DFC] border-none rounded-full absolute ml-[240px]">Seach
+                        </button>
                 </div>
 
             </div>
@@ -143,10 +141,14 @@
                 <h2 class="text-5xl font-extrabold ">Let’s Discuss</h2>
                 <p class="text-xl mt-5">Here are some discussion about Coding, Comedy and Music</p>
             </div>
-
+          
+            <div id="loading-spinner" class="text-center mt-3 hidden">
+                <span class="loading loading-spinner loading-lg"></span>
+            </div>
             <!-- discuss card -->
             <div class=" gap-4 lg:flex">
                 <div id="all-post-container" class="lg:w-[65%] my-14">
+                    
                     <!-- <div class="flex flex-col lg:flex-row gap-5 border-2 p-4  rounded-lg bg-[#797DFC1A]">
                         <div class="">
                             <img class="bg-slate-300 p-4 rounded-full" src="images/Frame (2).png" alt="">
@@ -184,7 +186,7 @@
                 <div class="lg:w-[35%] my-14 bg-[#797DFC1A] p-4 rounded-xl">
                     <div class="flex justify-between">
                         <h4 class="text-xl font-bold">Title</h4>
-                        <h4 class="text-xl font-bold flex">Mark as read <span>(0)</span></h4>
+                        <h4 class="text-xl font-bold flex">Mark as read (<span id="mark-read-count">0</span>)</h4>
                     </div>
                     <div class="mt-5 bg-white inline-flex items-baseline p-2">
                         <div class="w-[70%]">
@@ -214,7 +216,7 @@
                     like-minded individuals."</p>
 
 
-                <button class="btn btn-secondary bg-[#797DFC] border-none rounded-full absolute">Regiter Now
+                <button class="btn btn-secondary bg-[#797DFC] border-none rounded-full">Regiter Now
                 </button>
             </div>
 
@@ -230,7 +232,7 @@
         <section class="mt-16">
             <div class="text-center">
                 <h2 class="text-5xl font-extrabold ">Latest Posts</h2>
-                <p class="text-xl mt-5">Here is our some latest posts. </p>
+                <p class="text-xl mt-5">Here is our some latest posts. Stay up-to-date with the latest happenings and <br> discussions in our forum's news section! Join the conversation and be part of the latest buzz!</p>
             </div>
             <div id="latest-posts-container" class="grid grid-cols-3">
                 <!-- <div class=" bg-red-400 p-4 rounded-2xl space-y-4">
@@ -275,7 +277,7 @@
         </div>
 
         <div class="text-center mt-14">
-            <h5> &copyAll Right Reserved By Tufazzul</h5>
+            <h5> &copyAll Right Reserved By Tufazzul</h5>   
         </div>
 
     </footer>
