@@ -1,6 +1,4 @@
 
-let markReadCount = 0;
-
 const allPostLoad = async (catId) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${catId}`);
     const data = await response.json();
@@ -43,7 +41,7 @@ const allPostLoad = async (catId) => {
                                     <p>${item?.posted_time}</p>
                                 </div>
                                 <div  onclick="setReadValue('${item.title}', ${item?.view_count})" id ="mark-read" class ="all-Btn">
-                                    <button><img src="images/Group.png" alt=""></button>
+                                    <button onclick = "setReadCount()"><img src="images/Group.png" alt=""></button>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +69,7 @@ const loadDiscuss = async () => {
         data.posts.forEach(item => {
             let isActive = null;
             const div = document.createElement("div");
-            console.log(item)
+            // console.log(item)
             div.innerHTML = `
         <div class="flex flex-col lg:flex-row gap-5 border-2 p-4  rounded-lg bg-[#797DFC1A]">
                         <div class="relative">
@@ -101,7 +99,7 @@ const loadDiscuss = async () => {
                                     <p>${item?.posted_time}</p>
                                 </div>
                                 <div  onclick="setReadValue('${item.title.replace(/'/g,'@')}', ${item?.view_count})" id ="mark-read" class ="all-Btn">
-                                    <button><img src="images/Group.png" alt=""></button>
+                                    <button onclick = "setReadCount()"><img src="images/Group.png" alt=""></button>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +125,7 @@ const latestPosts = async (item) => {
 
     data.forEach(item => {
 
-        console.log(item)
+        // console.log(item)
         const div = document.createElement("div");
         div.innerHTML = `
         <div class=" bg-[#797DFC1A] p-4 rounded-2xl space-y-4">
@@ -209,7 +207,17 @@ function setReadValue(title, view) {
     `
 
     appendId.appendChild(div);
-    console.log('clicked')
+    // console.log('clicked')
+}
+
+
+
+let markReadCount = 0;
+
+function setReadCount() {
+    const element = document.getElementById('mark-read-count');
+    markReadCount++;
+    element.innerHTML = markReadCount;
 }
 
 
